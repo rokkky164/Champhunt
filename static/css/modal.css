@@ -1,0 +1,27 @@
+.padded-vr {
+    margin:6px 0;
+}
+
+.margin-left5 {
+    margin-left:  5px;
+}
+.margin-left80 {
+    margin-left:  80px;
+}
+.margin-top10 {
+    margin-top: 10px;
+}
+
+input[type=text] {
+    border: 2px solid black;
+    border-radius: 4px;
+    width: 100%;
+    padding: 9px 0px;
+    margin: 3px 0;
+    box-sizing: border-box;
+}
+
+.inviteaddoption{
+    padding-right: 0px;
+    margin-left: 60px;
+}

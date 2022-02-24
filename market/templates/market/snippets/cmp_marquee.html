@@ -1,0 +1,29 @@
+    <marquee behavior="scroll" direction="left" bgcolor="#222831" style="height:35px;" class="py-2">
+        <!-- <strong style="color:white">Players in action (last 21 hours):&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong> -->
+    {% for object in company_list %}
+    {% if object.company.id != 1 %}
+        {% if object.company.cmp > 0 %}    
+            <strong style="color:white">
+                <a href="{% url 'market:transaction' object.company.code %}" style="color:white">
+                    {{ object.name }}
+                </a>
+                : {{ object.company.cmp }}
+            {% if object.current_form > 0 %}
+                <small style="color: green">
+                ({{ object.company.cfcmp }}) <i class="fa fa-arrow-up"></i>
+                </small>
+            {% elif object.current_form < 0 %}
+                <small style="color: red">
+                ({{ object.company.cfcmp }}) <i class="fa fa-arrow-down"></i>
+                </small>
+            {% else %}
+                <small style="color: yellow">
+                ({{ object.company.cfcmp }}) <i></i>
+                </small>
+            {% endif %}
+            &emsp;
+            </strong>
+        {% endif %}
+    {% endif %}
+    {% endfor %}
+    </marquee>

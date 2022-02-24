@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block base_head %}
+	{% csrf_token %}
+	<title>Register</title>
+{% endblock %}
+
+{% block content %}
+
+{% include 'accounts/snippets/form.html' %}
+
+{% endblock %}

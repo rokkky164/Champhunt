@@ -1,0 +1,13 @@
+{% for player in home_team_players %}
+<p>
+<li><input type="checkbox" name="home_team_players" value="{{ player.id }}" id="" />{{ player.name }}
+    </li>
+</p>
+{% endfor %}
+
+{% for player in away_team_players %}
+<p>
+<li><input type="checkbox" name="away_team_players" value="{{ player.id }}" id="" />{{ player.name }}
+    </li>
+</p>
+{% endfor %}

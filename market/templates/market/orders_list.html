@@ -1,0 +1,28 @@
+{% load market_filters %}
+
+<div class="table-responsive">
+    <table class="table table-sm table-bordered text-center">
+        <thead>
+        <tr>
+            <th scope="col">Order ID</th>
+            <th scope="col">Status</th>
+            <th scope="col">Company Name</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Executed price</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for order in orders %}
+            <tr>
+                <td>
+                    <a href="#">{{ order.order_id }}</a>
+                </td>
+                <td class="{{order.status|get_badge}} w-50">{{order.status}}</td>
+                <td>{{order.company.name}}</td>
+                <td> {{ order.num_stocks }}</td>
+                <td>{{order.execution_price}}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>

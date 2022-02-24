@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block base_head %}
+<title>Player list for upcoming matches</title>
+{% endblock %}
+
+{% block out_content_top %}
+    <!-- marquee for cmp --> <!--company_list comes from class CompanyTransactionView defined in market:views.py-->
+    {% include 'market/snippets/cmp_marquee.html' with company_list=company_list %} 
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-12">
+    <h1 class="heading mb-4"></h1>
+    </div>
+</div>
+
+{% include 'market/snippets/team_players.html' with teamname=m1homename players=match1home %}
+{% include 'market/snippets/team_players.html' with teamname=m1awayname players=match1away %}
+
+{% if match2home %}
+    {% include 'market/snippets/team_players.html' with teamname=m2homename players=match2home %}
+    {% include 'market/snippets/team_players.html' with teamname=m2awayname players=match2away %}
+{% endif %}
+
+
+{% endblock %}

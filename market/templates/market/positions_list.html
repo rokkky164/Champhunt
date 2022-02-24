@@ -1,0 +1,24 @@
+<div class="table-responsive">
+    <table class="table table-hover datatable rounded responsive">
+        <thead>
+        <tr>
+            <th scope="col">Player</th>
+            <th scope="col">Net Qty</th>
+            <th scope="col">Avg Price</th>
+            <th scope="col">CMP</th>
+            <th scope="col">P&L</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for position in positions %}
+            <tr>
+                <td>{{position.company_name}}</td>
+                <td>{{ position.net_qty }}</td>
+                <td>{{position.avg_price }}</td>
+                <td>{{position.cmp }}</td>
+                <td>{{position.pnl }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>

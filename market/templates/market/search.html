@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block base_head %}
+<title>Search</title>
+{% endblock %}
+
+{% block content %}
+
+<h1>Search Result</h1>
+
+{% for searchcompany in allCompanies %}
+{% if searchcompany.cmp > 0 %}
+    <p><a href="{% url 'market:transaction' searchcompany.code %}">{{searchcompany.name}}</a></p>
+{% endif %}
+{% endfor %}
+
+{% endblock %}

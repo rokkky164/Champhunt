@@ -1,0 +1,15 @@
+COMPANIES = [
+    {"code": "KVP", "name": "Kevin Peterson",},
+    {"code": "ROB", "name": "Rory Burns",},
+    {"code": "VKL", "name": "Virat Kohli"},
+    {"code": "SUR", "name": "Suresh Raina"},
+    {"code": "MSD", "name": "M S Dhoni"},
+    {"code": "YOY", "name": "Yousuf Youhana"},
+    {"code": "JOS", "name": "Jos Butler"},
+    {"code": "JOR", "name": "Joe Roots"},
+    {"code": "RST", "name": "Ross Taylor"},
+    {"code": "BRM", "name": "Brendon MCculum"},
+    {"code": "PRS", "name": "Prithvi Shaw"},
+    {"code": "HAP", "name": "Hardik Pandya"},
+    {"code": "JOB", "name": "Johny Bairstow"},
+]

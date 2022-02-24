@@ -1,0 +1,67 @@
+{% extends 'market/market_index.html' %}
+{% load static %}
+
+{% block inner_left %}
+    <!-- Hidden variables -->
+    <input type="hidden" id="chart_type" value="line">
+    <input type="hidden" id="stock" value="10">
+    <!--  -->
+	<div class="profile_cover_wrapper">
+	    <div class="cover_wrapper d-flex align-items-end" style="background-image: url('assets/images/profile/profile_bg.png');">
+	        <div class="profile_wrapper d-flex align-items-center align-items-md-start">
+	            <div class="info_wrapper">
+	                {{player.name}}
+	                <p></p>
+	            </div>
+	        </div>
+	    </div>
+	    <div class="price_info_wrapper">
+	        <div class="hst">
+	            <div class="row d-flex align-items-center">
+	                <div class="col-sm text-center text-md-start shares">
+	                    <h4><i class="fas fa-dollar-sign"></i> 0.00 <span>(0 Shares)</span></h4>
+	                    <p>Total Value</p>
+	                </div>
+	                <div class="col-sm text-center price">
+	                    <h4><i class="fas fa-dollar-sign"></i> 1.06</h4>
+	                    <p>Current Price</p>
+	                </div>
+	                <div class="col-sm text-center change">
+	                    <h4><i class="fas fa-dollar-sign"></i> 0.21 (11%) <span class="fas fa-sort-up"></span></h4>
+	                    <p>24H Change</p>
+	                </div>
+	                <div class="col-sm text-center btns">
+	                    <a href="{% url 'market:place_order' %}" class="btn btn-primary">Sell</a>
+	                    <a href="{% url 'market:place_order' %}" class="btn btn-primary">Buy</a>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+	<div class="fan_price_chart_wrapper">
+	    <div id="stock_chart"></div>
+	</div>
+
+	<div class="history_wrapper">
+	    <h3>Player History</h3>
+	    <div class="game_table_wrapper">
+	        <div class="table_responsive">
+	            <table class="table">
+	                <thead>
+	                    <tr>
+	                       
+	                    </tr>
+	                </thead>
+	                <tbody>
+	                    <tr>                                  
+	                    </tr>
+	                </tbody>
+	            </table>
+	        </div>
+	    </div>
+	    <div class="show_wrapper text-center">
+	        <a href="#">View More</a>
+	    </div>
+	</div>
+{% endblock %}

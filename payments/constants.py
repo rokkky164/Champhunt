@@ -1,0 +1,9 @@
+PAYTM_MERCHANT_ID = "<your_merchant_id>"
+PAYTM_SECRET_KEY = "<your_paytm_secret_key>"
+PAYTM_WEBSITE = "WEBSTAGING"
+PAYTM_CHANNEL_ID = "WEB"
+PAYTM_INDUSTRY_TYPE_ID = "Retail"
+
+
+RAZOR_KEY_ID = "rzp_test_bLZX77ezVvWaSG"
+RAZOR_KEY_SECRET = "Y9Lx8Erqggawj5H73hrbK3TP"

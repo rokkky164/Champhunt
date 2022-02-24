@@ -1,0 +1,246 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags static %}
+
+{% block javascript %}
+    <script type="text/javascript">
+        var chart_type = "{{ chart_type }}";
+    </script>
+    <script src="{% static 'js/chart.js' %}"></script>
+    <script src="{% static 'js/cmp_socket.js' %}"></script>
+{% endblock%}
+
+{% block css_files %}
+    <link href="{% static 'css/utility.css' %}" type="text/css" rel="stylesheet">
+{% endblock %}
+
+{% block left_sidebar %}
+	<div class="sidebar">
+		<div class="brand_wrapper text-center d-flex align-items-center justify-content-around">
+		    <a href="index.html" class="brand">
+		    </a>
+		    <div class="close_sidenav d-xxl-none" title="Close Side Bar">
+		        <i class="flaticon-back"></i>
+		    </div>
+		</div>
+		<div class="user_wrapper">
+		    <div class="profile_wrapper text-center">
+		        <div class="profile_content">
+		            <a href="user-about.html" class="profile">
+		            </a>
+		        </div>
+		        <h5 class="text-center">
+		            <a href="{% url 'accounts:user_profile' user.pk %}">{{ user.username }}</a>
+		        </h5>
+		    </div>
+		</div>
+		<div class="portfolio_wrapper">
+		    <ul class="nav flex-column portfolio">
+                <li class="nav-item">
+                    <a href="{% url 'market:overview' %}" class="nav-link d-flex align-items-center">
+                        <i class="flaticon-briefcase"></i>Dashboard
+                    </a>
+                </li>
+		        <li class="nav-item">
+		            <a href="{% url 'accounts:user_portfolio' user.pk %}" class="nav-link d-flex align-items-center">
+		                <i class="flaticon-briefcase"></i>Portfolio
+		            </a>
+		        </li>
+		        <li class="nav-item">
+		            <a href="{% url 'accounts:user_profile' user.pk %}" class="nav-link d-flex align-items-center">
+		                <i class="flaticon-user"></i> About
+		            </a>
+		        </li>
+		    </ul>
+		</div>
+		<div class="trading_wrapper">
+		    <h5>Trading</h5>
+		    <ul class="nav flex-column">
+		        <li class="nav-item">
+		            <a href="{% url 'market:overview' %}" class="nav-link d-flex align-items-center active">
+		                <i class="flaticon-basketball-ball-variant"></i> Cricket
+		            </a>
+		        </li>
+		    </ul>
+		</div>
+		<div class="affiliate_wrapper">
+		    <ul class="nav flex-column affiliate">
+		        <li class="nav-item">
+		            <a href="#" class="nav-link d-flex align-items-center">
+		                <i class="flaticon-chat"></i> Support
+		            </a>
+		        </li>
+		        <li class="nav-item">
+		            <a href="#" class="nav-link d-flex align-items-center">
+		                <i class="flaticon-document"></i> Rules
+		            </a>
+		        </li>
+		    </ul>
+		</div>
+		<div class="sidebar_footer d-flex align-items-center justify-content-around">
+		    <div class="right_col">
+		        <div class="switch_wrapper">
+		            <button class="btn switcher" id="light" title="Switch to Light Theme">
+		                <i class="fas fa-star-and-crescent"></i>
+		            </button>
+		            <button class="btn switcher" id="dark" title="Switch to Dark Theme">
+		                <i class="fas fa-adjust"></i>
+		            </button>
+		        </div>
+		    </div>
+		</div>
+	</div>
+{% endblock %}
+{% block body_content %}
+    <div class="container-fluid top_bar fixed-top">
+        <div class="top_bar_wrapper d-flex align-items-center justify-content-between">
+            <div class="search_bar d-flex align-items-center">
+                <div class="show_hide d-flex align-items-center">
+                    <button type="button" id="click" title="Toggle Side Bar">
+                        <span class="toggle_bar_one"></span>
+                        <span class="toggle_bar_two"></span>
+                        <span class="toggle_bar_three"></span>
+                    </button>
+                </div>
+                <div class="form">
+                    <form action="#" method="post" id="forSm">
+                        <input type="search" name="searchBar" id="searchPlayers" placeholder="Search Players" required="required">
+                        <button type="submit">
+                            <i class="flaticon-loupe"></i>
+                        </button>
+                    </form>
+                    <a href="javascript:void(0)" class="search_toggle d-block d-md-none">
+                        <i class="flaticon-loupe"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="user_bar d-flex align-items-center justify-content-end">
+                <div class="search_wrapper">
+                    <a href="javascript:void(0)" class="search_sm d-none">
+                        <i class="flaticon-loupe d-flex align-items-center"></i>
+                    </a>
+                </div>
+                <div class="dollar_wrapper">
+                    <a href="#">&#8377; {{ user.cash }}</a>
+                </div>
+                <div class="wallet_wrapper">
+                    <a href="#">
+                        <i class="flaticon-wallet-filled-money-tool"></i>
+                    </a>
+                </div>
+                <div class="notification_wrapper">
+                    <a href="#">
+                        <i class="flaticon-bell"></i>
+                    </a>
+                </div>
+                <div class="profile_wrapper d-flex align-items-center">
+                    <div class="img_wrapper">
+                        <a href="#">
+                        </a>
+                    </div>
+                    <div class="drop">
+                        <a href="javascript:void(0)" class="profile_link disable">{{ user.username }}<i class="fas fa-caret-down"></i></a>
+                        <div class="drop_content">
+                            <a href="{% url 'accounts:user_profile' user.pk %}">Profile</a>
+                            <a href="{% url 'accounts:logout' %}">Log Out</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block inner_left %}
+    <!-- Hidden variables -->
+    <input type="hidden" id="chart_type" value="line">
+    <input type="hidden" id="stock" value="10">
+    <!--  -->
+    <div class="league_cover_wrapper">
+    <div class="league_info" style="background-image: url('assets/images/league/cover_img.png');">
+        <div class="crictext">Brendon Mc Cullum</div>
+        <div id="stock_chart"></div>
+    </div>
+    <div class="players_tab_wrapper">
+    <div id="recent" class="player_search_tabs activ">
+        <div class="players_responsive_table_wrapper">
+            <table class="table">
+                {% for player in players %}
+                    <tr>
+                        <td class="profile_info">
+                            <div class="d-flex align-items-center justify-content-start">
+                                <div class="wrapper">
+                                    <a href="player-profile.html" class="d-flex align-items-end justify-content-center">
+                                    </a>
+                                </div>
+                                <div class="player_name">
+                                    <a href="{% url 'market:player_detail' player.pk %}">{{ player.name }}</a>
+                                    <p></p>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="price_range">
+                            <div class="d-flex align-items-center justify-content-center">
+                                <div class="price">
+                                    <p>&#8377; {{ player.cmp }}</p>
+                                    <p>{{ player.change }}<i class="fas fa-caret-up"></i></p>
+                                </div>
+                                <div id="profile_chart_oner" class="charts">
+                                    
+                                </div>
+                            </div>
+                        </td>
+                        <td class="sell_buy">
+                            <div class="btn_wrapper d-flex align-items-center  justify-content-end">
+                                <a href="{% url 'market:place_order' %}" class="btn btn-primary">SELL</a>
+                                <a href="{% url 'market:place_order' %}" class="btn btn-primary">BUY</a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="show_wrapper text-center">
+            <a href="#">View More</a>
+        </div>
+    </div>
+</div>       
+{% endblock %}
+
+{% block inner_right %}
+    <div class="inner_right">
+        <div class="view_wrapper d-flex align-items-center justify-content-between">
+            <div class="text">
+                <h5>Upcoming Games</h5>
+            </div>
+            <div class="link">
+                <a href="#">VIEW ALL</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="inner col-sm-6 col-md-6 col-lg-4 col-xl-12">
+                <div class="game_wrapper2">
+                    <div class="game_header d-flex align-items-start justify-content-around">
+                        <div class="left_col text-center">
+                            <!-- <img src="" alt="New York Team"> -->
+                            <p>
+                                <a href="league.html">England</a>
+                            </p>
+                        </div>
+                        <div class="middle_col d-flex align-items-start text-center">
+                            <!-- <img src="" alt="Versus"> -->
+                        </div>
+                        <div class="right_col text-center">
+                            <!-- <img src="" alt="Phoenix Team"> -->
+                            <p>
+                                <a href="league.html">Australia</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="game_footer d-flex align-items-center justify-content-around">
+                        <p class="date">April 14, 2022</p>
+                        <p class="time">02:00 AM</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock%}

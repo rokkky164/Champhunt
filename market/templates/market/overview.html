@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block base_head %}
+<title>Market overview</title>
+{% endblock %}
+
+{% block out_content_top %}
+    <!-- marquee for cmp -->
+    {% include 'market/snippets/cmp_marquee.html' with company_list=company_list %}
+{% endblock %}
+
+
+{% block content %}
+
+<div class="row">
+    <div class="col-12">
+    <h1 class="heading mb-4">Market overview</h1>
+    </div>
+    <!-- <div class="col-12 text-center mt-5"> -->
+    <!-- <p style="font-size: 25px;"><b>Cash Available:</b> &#8377; {{ request.user.cash|intcomma }}</p><br> -->
+    <!-- <p style="font-size: 15px;"><b>Escrow:</b> &#8377; {{ request.user.escrow|intcomma }}</p><br> -->
+    <!-- </div> -->
+</div>
+<center>Upcoming matches: 
+{% for upcomingmatch in upcomingmatches %}
+<p><a href="/market/upcomingmatchplayers">{{ upcomingmatch.home_team }} vs {{ upcomingmatch.away_team}}</a></p>
+{% endfor %}
+</center>
+<p><center><a href="/market/allplayers">All listed stocks</a></center></p>
+<!-- {% include 'market/snippets/inner_navbar.html' with company_list=object_list %} -->
+{% include 'snippets/gainers_losers.html' with gainers=gainers losers=losers %}
+
+
+<!-- Insert a table for top gainers and losers here -->
+
+<!-- <div class="row">
+    <div class="col-12">
+    <h4 class="heading mb-4">Your holdings:</h4>
+    </div>
+</div> -->
+{% if investments %}
+    {% include 'snippets/market_overview_table.html' with object_list=investments %}
+{% endif %}
+<!-- {% include 'market/snippets/scheduler_shortcut.html' with username=request.user.username %} -->
+
+{% endblock %}

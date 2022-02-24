@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block base_head %}
+<title>Match creation page</title>
+{% endblock %}
+
+
+{% block content %}
+
+<p> 
+    <form action="{% url 'market:match' %}" method='POST' id="matchForm" data-players-url="{% url 'market:ajax_load_players' %}" novalidate>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="Submit" name="submit" value="Submit"/>
+    </form>
+</p>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<script>
+    $("#id_home_team").change(function(){
+        var url     = $("#matchForm").attr("data-players-url");
+        var teamName = $(this).val();
+
+        $.ajax({
+            url : url,
+            data : {
+                'home_team' : teamName
+            },
+            success : function(data) {
+                $("#id_home_team_players").html(data);
+            }
+        });
+    });
+
+    $("#id_away_team").change(function(){
+        var url     = $("#matchForm").attr("data-players-url");
+        var teamName  = $(this).val();
+
+        $.ajax({
+            url : url,
+            data : {
+                'away_team' : teamName
+            },
+            success : function(data) {
+                $("#id_away_team_players").html(data);
+            }
+        });
+    });
+
+
+</script>
+
+
+
+
+
+
+<!--This link should appear only after the submit button has been pressed-->
+<p>
+    <a href="{% url 'market:dashboard' %}"> Click here to go to the scoring dashboard </a>
+</p>
+{% endblock %}

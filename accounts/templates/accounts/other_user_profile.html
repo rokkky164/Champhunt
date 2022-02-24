@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block base_head %}
+<title>User profile</title>
+{% endblock %}
+
+
+{% block out_content_top %}
+    <!-- marquee for cmp --> <!--company_list comes from class CompanyTransactionView defined in market:views.py-->
+    {% include 'market/snippets/cmp_marquee.html' with company_list=company_list %} 
+{% endblock %}
+
+{% block content %}
+
+<!--{% include 'market/snippets/inner_navbar.html' with company_list=company_list %}-->
+<center><a href="/market/allplayers">Click here for a list of all listed stocks</a></center>
+<div class="row">
+    <div class="col-12 mt-3">
+    <div class="text-center">
+        <h1 class="heading">{{ object.full_name }}</h1>
+        <p class="lead">{{ object.username }} | {{ object.email }}</p>
+        <p><h4><b>Net Worth:</b> &#8377; {{ net_worth|intcomma }}</h4></p>
+        <!-- <p class="lead">{{ object.email }}</p> -->
+    </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block content %}
+<center><a href="/market/allplayers">Click here for a list of all listed stocks</a></center>
+<div class="row">
+    <div class="col-12 mt-3">
+    <div class="text-center">
+        <h1 class="heading">{{ object.full_name }}</h1>
+        <p class="lead">{{ object.username }} | {{ object.email }}</p>
+        <h5><b>Cash Available:</b> &#8377; {{ object.cash|intcomma }}</h5>
+        (Escrow: &#8377; {{ object.escrow|intcomma }})
+        </div>
+        <div class="col-12 text-center mb-5">
+        <p><h4><b>Net Worth:</b> &#8377; {{ net_worth|intcomma }}</h4></p>
+        <!-- <p class="lead">{{ object.email }}</p> -->
+    </div>
+    </div>
+</div>
+{% if investments %}
+{% include 'snippets/market_overview_table.html' with object_list=investments %}
+{% endif %}
+
+{% endblock %}

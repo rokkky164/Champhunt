@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block base_head %}
+<title>Profile</title>
+{% endblock %}
+
+{% block out_content_top %}
+    <!-- marquee for cmp --> <!--company_list comes from class CompanyTransactionView defined in market:views.py-->
+    {% include 'market/snippets/cmp_marquee.html' with company_list=company_list %} 
+{% endblock %}
+
+{% block content %}
+{% for upcomingmatch in upcomingmatches %}
+<center>Upcoming matches: <p><a href="/market/upcomingmatchplayers">{{ upcomingmatch.home_team }} vs {{ upcomingmatch.away_team}}</a></p></center>
+{% endfor %}
+
+<div class="row">
+    <div class="col-12">
+        <h1 class="heading mb-4">All listed stocks</h1>
+        <div class="row" style="font-weight: bold;">
+            <div class="col-lg-3">
+                Name
+            </div>
+            <div class="col-lg-3">
+                Ticker
+            </div>
+            <div class="col-lg-3">
+                Current Market Price
+            </div>
+            <div class="col-lg-3">
+                Last Updated
+            </div>
+        </div>
+        <hr/>
+        {% for company in companies %}
+            <div class="row" style="font-weight: bold;">
+                <div class="col-lg-3">
+                    <a href="{% url 'market:player_detail' player_id=company.id %}">
+                        {{ company.name }}
+                    </a>
+                </div>
+                <div class="col-lg-3">
+                    {{ company.code }}
+                </div>
+                <div class="col-lg-3">
+                    {{ company.cmp }}
+                </div>
+                <div class="col-lg-3">
+                    {{ company.updated }}
+                </div>
+                <hr/>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+    
+
+{% endblock %}

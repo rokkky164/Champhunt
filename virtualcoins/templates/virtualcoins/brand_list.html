@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load market_filters %}
+
+{% block additional_meta %}
+    <meta name="application-messages" content="{{ messages|message_to_json }}"/>
+{% endblock %}
+
+{% block content %}
+	
+	<!-- Button trigger modal -->
+	<div class="row">
+		<div class="col-lg-10">
+			<h3 class="text-center">Redeem your virtual coins with these e-vouchers</h3>
+		</div>
+		<div class="col-lg-2">
+	        <a class="btn btn-grn" 
+	           href="{% url 'virtualcoins:load_up' %}">
+	           <i class="fas fa-rupee-sign"></i> Load up
+	        </a>
+	    </div>
+    </div>
+	<div class="row">
+		{% for brand in brand_list %}
+			<div class="col-lg-3 mb-5 mt-3">
+				<div class="card h-100" style="min-height: 300px; max-height: 300px;">
+					<div class="card-body bg-grey d-flex flex-column">
+						<div class="row">
+							<div class="col bring-center">
+								<img class="img-responsive pb-logo lazyloaded" src="{{brand.logo.url}}" width="120"/>
+							</div>
+						</div>
+						<div class="row text-center">
+							<div class="col mt-5">
+								<h6 class="text-center">{{brand.name}} e-voucher</h6>
+							</div>
+						</div>
+						<div class="row bring-center mt-auto">
+							<div class="col mt-5 bring-center">
+								<button type="submit" class="align-self-end mt-auto btn btn-red">Redeem</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}

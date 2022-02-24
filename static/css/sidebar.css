@@ -1,0 +1,119 @@
+#wrapper {
+    /*overflow-x: hidden;*/
+}
+
+#sidebar-wrapper {
+    max-width: 28rem;
+    margin-left: 0rem;
+    -webkit-transition: margin 0.25s ease-out;
+    -moz-transition: margin 0.25s ease-out;
+    -o-transition: margin 0.25s ease-out;
+    transition: margin 0.25s ease-out;
+    position: fixed;
+    /*z-index: 1030;*/
+    overflow-y: auto;
+    border: 2px solid #000000;
+}
+
+#sidebar-wrapper .list-group {
+    /*width: 17rem;*/
+}
+
+#sidebar-wrapper .list-group.list-group-root {
+    padding: 0;
+    overflow: hidden;
+}
+
+#sidebar-wrapper .list-group.list-group-root .list-group {
+    margin-bottom: 0;
+}
+
+#sidebar-wrapper .list-group.list-group-root .list-group-item {
+    padding: 0.75rem 0.75rem;
+    border-radius: 0;
+    border-width: 1px 0 0 0;
+}
+
+#sidebar-wrapper .list-group.list-group-root > .list-group-item:first-child {
+    border-top-width: 0;
+}
+
+#sidebar-wrapper .list-group.list-group-root > .list-group > .list-group-item {
+    padding-left: 2rem;
+    font-size: 0.8rem;
+}
+
+#sidebar-wrapper
+    .list-group.list-group-root
+    > .list-group
+    > .list-group
+    > .list-group-item {
+    padding-left: 1rem;
+}
+
+#sidebar-wrapper .list-group .list-group-item {
+    color: var(--body-color);
+    background-color: inherit;
+    border: none;
+    text-decoration: none;
+}
+
+#sidebar-wrapper .list-group .list-group-item:hover {
+    font-weight: 500;
+}
+
+#sidebar-wrapper .list-group .list-group-item.active {
+    font-weight: 600;
+}
+
+#page-content-wrapper {
+    margin-top: 4.2rem !important;
+    -webkit-transition: margin 0.25s ease-out;
+    -moz-transition: margin 0.25s ease-out;
+    -o-transition: margin 0.25s ease-out;
+    transition: margin 0.25s ease-out;
+}
+
+@media (max-width: 1999px) {
+    #wrapper.toggled #sidebar-wrapper {
+        margin-left: 0;
+    }
+
+    #wrapper.toggled #sidebar_overlay {
+        background: #000000;
+        opacity: 0.9;
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        z-index: 9999;
+    }
+}
+
+@media (min-width: 1200px) {
+    #main-navbar:not(.full-width-navbar) {
+        margin-left: 18rem;
+    }
+
+    #page-content-wrapper {
+        margin-left: 18rem;
+    }
+
+    #sidebar-wrapper {
+        margin-left: 0;
+    }
+
+    #page-content-wrapper {
+        min-width: 0;
+    }
+}
+
+
+.sidebar {
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  background-color: #f1f1f1;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+}

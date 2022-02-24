@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load market_filters %}
+
+{% block additional_meta %}
+    <meta name="application-messages" content="{{ messages|message_to_json }}"/>
+{% endblock %}
+
+{% block content_fluid %}
+	<!-- Watchlist -->
+	<div id="sidebar-wrapper" class="ht-95">
+		<div class="row">
+			<div class="card bg-light border border-black watchlist-card">
+				<div class="card-header black-bg">
+					<div class="row">
+						<div class="col-lg-10">
+							<select id="stocks_watchlist" class="width-100">
+							</select>
+						</div>
+						<div class="col-lg-1">
+						  <button type="button" class="create-watchlist">
+			           	  	<span aria-hidden="true">+</span>
+			           	  </button>
+						</div>
+					</div>
+				</div>
+				<div class="card-body border border-grey" id="stocks_watchlist_dropdown">
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	<!-- Stock Chart -->
+	<div class="row">
+		<div class="col-lg-9 col-sm-9 offset-3 ht-60">
+			<div class="card mx-auto bg-light stockchart-card">
+				<div class="card-body border border-grey">
+					{% include 'market/stockchart_inlineform.html' %}
+				 	<h3><b></b></h3>
+				 	<div id="stock_chart"></div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-3 sidebar-nav orderbookmodal">
+			{% include 'market/order_book_modal.html' %}
+		</div>
+	</div>
+	{% include 'market/createwatchlist.html' %}
+	<!-- Order/Positions tabs -->
+	<div class="row">
+		<div class="col-lg-9 col-sm-9 offset-3">
+			<div class="card bg-light order-positions-tab-header">
+				<div class="card-header">
+					<div class="row tab">
+						<div class="col-lg-4">
+						 	<button class="tablinks active" onclick="openTab(event, 'Orders')">Orders</button>
+						</div>
+						<div class="col-lg-4">
+						 	<button class="tablinks" onclick="openTab(event, 'Positions')">Positions</button>
+						</div>
+						<div class="col-lg-4">
+						 	<button class="tablinks" onclick="openTab(event, 'Holdings')">Holdings</button>
+						</div>
+					</div>
+				</div>
+				  <div class="card-body border border-grey order-positions-tab-content">
+					<!-- Tab content -->
+					<div id="Orders" class="tabcontent display-block">
+						 {% include 'market/orders_list.html' with orders=orders %}
+					</div>
+
+					<div id="Positions" class="tabcontent">
+						 {% include 'market/positions_list.html' with positions=positions %}
+					</div>
+
+					<div id="Holdings" class="tabcontent">
+						 {% include 'market/holdings_list.html' with holdings=holdings %}
+					</div>
+					<!-- Tab content end -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Order/Positions tab end -->
+{% endblock %}
+
+{% block javascript %}
+	<script type="text/javascript">
+		var chart_type = "{{ chart_type }}";
+		var watchlists = "{{ watchlists|safe }}"
+	</script>
+	<script src="{% static 'js/chart.js' %}"></script>
+	<script src="{% static 'js/trading_dashboard.js' %}"></script>
+	<script src="{% static 'js/cmp_socket.js' %}"></script>
+{% endblock%}
+
+{% block css_files %}
+	<link href="{% static 'css/utility.css' %}" type="text/css" rel="stylesheet">
+{% endblock%}

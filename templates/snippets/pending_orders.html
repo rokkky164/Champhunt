@@ -1,0 +1,76 @@
+<div class="row">
+    <div class="col-12">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th colspan = "6" class="text-left">Pending orders (cancellation feature coming soon)</th>
+                </tr>
+                <tr>
+                    <!-- <th class="text-center">S.no</th> -->
+                    <th class="text-center">Stock</th>
+                    <!-- <th class="text-center">Quantity</th> -->
+                    <!-- <th class="text-center">Stocks Available</th> -->
+                    <th class="text-center">CMP</th>
+                    <th class="text-center">Mode</th>
+                    <th class="text-center">Status</th>
+                    <th class="text-center">Pending</th>
+                    <th class="text-center">Executed</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for object in pending_buy %}
+                    <tr>
+                        <!-- <td class="text-center">{{ forloop.counter }}</td> -->
+                        <td class="text-center">
+                            <a href="{% url 'market:transaction' object.company.code %}">
+                                {{ object.company }}
+                            </a>
+                        </td>
+                        <td class="text-center">
+                            &#8377; {{ object.company.cmp }}
+                            {% if object.company.change >= 0 %}
+                                <small style="color: green">
+                                    ({{ object.company.change }}) <i class="fa fa-arrow-up"></i>
+                                </small><br>
+                            {% elif object.company.change < 0 %}
+                                <small style="color: red">
+                                    ({{ object.company.change }}) <i class="fa fa-arrow-down"></i>
+                                </small><br>
+                            {% endif %}
+                        <td class="text-center">BUY</td>
+                        <td class="text-center">{{ object.status }}</td>
+                        <td class="text-center">{{ object.num_stocks }}</td> 
+                        <td class="text-center">{{ object.bought }}</td> 
+                        </td>
+                    </tr>
+                {% endfor %}
+                {% for object in pending_sell %}
+                    <tr>
+                        <!-- <td class="text-center">{{ forloop.counter }}</td> -->
+                        <td class="text-center">
+                            <a href="{% url 'market:transaction' object.company.code %}">
+                                {{ object.company }}
+                            </a>
+                        </td>
+                        <td class="text-center">
+                            &#8377; {{ object.company.cmp }}
+                            {% if object.company.change >= 0 %}
+                                <small style="color: green">
+                                    ({{ object.company.change }}) <i class="fa fa-arrow-up"></i>
+                                </small><br>
+                            {% elif object.company.change < 0 %}
+                                <small style="color: red">
+                                    ({{ object.company.change }}) <i class="fa fa-arrow-down"></i>
+                                </small><br>
+                            {% endif %}
+                        <td class="text-center">SELL</td>
+                        <td class="text-center">{{ object.status }}</td>
+                        <td class="text-center">{{ object.num_stocks }}</td> 
+                        <td class="text-center">{{ object.sold }}</td> 
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

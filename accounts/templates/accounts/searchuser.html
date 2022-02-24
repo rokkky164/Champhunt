@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block base_head %}
+<title>User search</title>
+{% endblock %}
+
+{% block content %}
+
+<h1>Search result</h1>
+
+{% for searchuser in allUsers %}
+    <p><a href="{% url 'accounts:profiles' searchuser.username %}">{{searchuser.name}}</a></p>
+{% endfor %}
+
+{% endblock %}

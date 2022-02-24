@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css_files %}
+   <link href="{% static 'css/modal.css' %}" type="text/css" rel="stylesheet">
+{% endblock %}
+{% block content %}
+   <section>
+      <h1>Invite your friends to Cricket Stock Market</h1>
+      <!-- Button trigger modal -->
+      <div class="float-right">
+         <button type="button" class="btn btn-primary csm-btn" data-toggle="modal" data-target="#myModal">
+         Invite friends
+         </button>
+      </div>
+   </section>
+   <!-- Modal -->
+   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog modal-lg" role="document">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h4 class="modal-title" id="myModalLabel">Invite your friends</h4>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+               <div id="errors" style="color: red" class="text-center"></div>
+               <form method="post" action="{% url 'accounts:invitation' %}" id="invite_friends_form">
+                  {% csrf_token %}
+                  <div class="row text-center">
+                     <div class="col-lg-5">
+                        <label>Email Address</label>
+                     </div>
+                     <div class="col-lg-5">
+                        <label>Name (Optional)</label>
+                     </div>
+                  </div>
+                  <div class="row padded-vr">
+                     <div class="col-lg-1">
+                     </div>
+                     <div class="col-lg-5">
+                        <input type="text" id="email" name="invite-email" required><br><br>
+                     </div>
+                     <div class="col-lg-5">
+                        <input type="text" id="name" name="invite-name"><br><br>
+                     </div>
+                     <div class="col-lg-1 margin-top10 pull-right">
+                        <button type="button" class="add-row">
+                        <span aria-hidden="true">+</span>
+                        </button>
+                     </div>
+                  </div>
+                  <div id="inviteOptions"></div>
+               </form>
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+               <button type="submit" class="btn btn-primary csm-btn send-invite" form="modal-details">Send Invitation</button>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- Template for adding rows  -->
+   <script id="inviteTemplate" type="text/x-handlebars-template">
+      <div class="row padded-vr inviteOption removeOneItem">
+      	  <div class="col-lg-1 margin-top10 pull-left">
+      	  	<button type="button" class="removeOne">
+           	  	<span aria-hidden="true">-</span>
+           	 </button></div>
+         <div class="col-lg-5">
+            	 <input type="text" id="email" name="email" required><br><br>
+         </div>
+         <div class="col-lg-5">
+            	 <input type="text" id="name" name="name"><br><br>
+         </div>
+         <div class="col-lg-1 margin-top10 pull-right">
+           	  <button type="button" class="add-row">
+           	  	<span aria-hidden="true">+</span>
+           	  </button>
+         </div>
+      </div>
+   </script>
+{% endblock %}
+{% block javascript %}
+   <script src="{% static 'js/invite.js' %}"></script>
+{% endblock %}

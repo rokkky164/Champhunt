@@ -1,0 +1,44 @@
+{% load static %}
+
+<section class="form_bg">
+    <div class="container">
+        <div class="form_container">
+            <div class="form_header">
+                <a href="index.html" class="registration_logo">
+                </a>
+            </div>
+            <form action="{% url 'accounts:register' %}" method="POST" class="mt-60">
+                {% csrf_token %}
+                <h1 class="form_title">Let's Create Your Account</h1>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" placeholder="Enter Your Email" class="form-control para" id="email" required="required" name="email">
+                </div>
+                <div class="mb-3">
+                    <label for="password-field" class="form-label">Password</label>
+                    <div class="show_password">
+                        <input type="password" placeholder="Enter Your Password" class="form-control para" id="password-field" required="required" name="password1">
+                        <i class="fas fa-eye toggle-password"></i>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="con_password" class="form-label">Confirm Password</label>
+                    <input type="password" placeholder="Enter Your Confirm Password" class="form-control para" id="con_password" required="required" name="password2">
+                </div>
+                <button type="submit" class="btn btn-primary">Register Now!</button>
+                <div class="form_footer">
+                    <span>OR</span>
+                    <div class="social_container d-flex align-items-center">
+                        <div class="facebook">
+                            <a href="#" class="para d-flex align-items-center justify-content-evenly"><img src="{% static 'img/facebook.png' %}" alt="Sign Up With Facebook">FACEBOOK</a>
+                        </div>
+                        <div class="google">
+                            <a href="#" class="para d-flex align-items-center justify-content-evenly"><img src="{% static 'img/google.png' %}" alt="Sign Up With Google"> GOOGLE</a>
+                        </div>
+                    </div>
+                    <p class="para">Already have an account. <a href="login.html">Log in</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,20 @@
+.crictext {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 1.5;
+    text-transform: capitalize;
+    color: #d7d8ff;
+} 
+
+
+.inner_left {
+    text-align: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    -webkit-border-radius: 5px 5px 0 px 0 px;
+    -moz-border-radius: 5px 5px 0px 0px;
+    -ms-border-radius: 5px 5px 0px 0px;
+    border-radius: 5 px 5 px 0 px 0 px;
+}

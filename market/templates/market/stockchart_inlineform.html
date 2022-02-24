@@ -1,0 +1,6 @@
+<form class="form-inline stockchartform"  method="POST">
+    {% csrf_token %}
+    <div class="row">
+        {{ stockchart_form.as_table }}
+    </div>
+</form>

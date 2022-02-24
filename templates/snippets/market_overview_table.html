@@ -1,0 +1,60 @@
+<center>
+<div class="row">
+    <div class="col-12">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th colspan = "2" class="text-left">Holdings</th>
+                </tr>
+                <tr>
+                    <th class="text-center">S.no</th>
+                    <th class="text-center">Stock</th>
+                    <th class="text-center">Quantity</th>
+                    <th class="text-center">Avg Buy Price</th>
+                    <th class="text-center">CMP</th>
+                    <th class="text-center">Unrealized G/L</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for object in object_list %}
+                    {% if object.stocks > 0 %}
+                        <tr>
+                            <td class="text-center">{{ forloop.counter }}</td>
+                            <td class="text-center">
+                                <a href="{% url 'market:transaction' object.company.code %}">
+                                    {{ object.company }}
+                                </a>
+                            </td>
+                            <td class="text-center">{{ object.stocks }}</td> 
+                            <td class="text-center">{{ object.avgprice }}</td> 
+                            <td class="text-center">
+                                &#8377; {{ object.company.cmp }}
+                                {% if object.company.change >= 0 %}
+                                    <small style="color: green">
+                                        ({{ object.company.change }}) <i class="fa fa-arrow-up"></i>
+                                    </small><br>
+                                {% elif object.company.change < 0 %}
+                                    <small style="color: red">
+                                        ({{ object.company.change }}) <i class="fa fa-arrow-down"></i>
+                                    </small><br>
+                                {% endif %}
+                            </td>
+                            <td class="text-center">
+                                {% if object.gain_loss >= 0 %}
+                                    <small style="color: green">
+                                        ({{ object.gain_loss }}) <i class="fa fa-arrow-up"></i>
+                                    </small><br>
+                                {% elif object.gain_loss < 0 %}
+                                    <small style="color: red">
+                                        ({{ object.gain_loss }}) <i class="fa fa-arrow-down"></i>
+                                    </small><br>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+</center>

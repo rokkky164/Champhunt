@@ -1,0 +1,17 @@
+{% autoescape off %}
+
+Hello {{invited_name}},
+	{{user.full_name}} has invited you to join exciting new stock market of cricket.
+	
+	On signing up , you will receive a credit of 1000 {{currency}} to play.
+
+	you can <a href="{{invitation_url}}">accept/decline</a> this invitation. 
+
+	This invitation will expire in 2 weeks. 
+
+
+<b>Thanks and Regards</b>
+
+<b>Team CrickStockMarket</b>
+
+{% endautoescape %}

@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content_fluid %}
+<div class="row">
+   <div class="col">
+      <div class="card form-group" style="max-width: 20rem;min-height: 100%;">
+         <div class="col">
+            <h3 class="text-center">Conversations</h3>
+            <div class="">
+               <i class="fas fa-plus">New Conversation</i> 
+            </div>
+            <hr style="border: 1 px;">
+            <label style="">General</label>
+            <hr style="border: 1 px;">
+         </div>
+         <div class="row margin-left20">
+            <img src={% static 'img/profilepic.png' %} width="60" height="50"></img>
+            <b>Justin Trisdale</b>
+         </div>
+         <div class="margin-left20">
+            <p><a style="color: #0d47a1 !important">@Adam Lang </a>Can you send on more docs.</p>
+         </div>
+         <div class="row margin-left20">
+            <img src={% static 'img/profilepic.png' %} width="60" height="50"></img>
+            <b>Adam Lang</b>
+         </div>
+         <div class="margin-left20">
+            <p>Sure! I'm on it</p>
+         </div>
+        <div class="row margin-left20">
+            <img src={% static 'img/profilepic.png' %} width="60" height="50"></img>
+            <b>Justin Trisdale</b>
+         </div>
+         <div class="margin-left20">
+            <p>I've reviewed the documents you sent, looks good</p>
+         </div>
+         <div class="row margin-left20">
+            <img src={% static 'img/profilepic.png' %} width="60" height="50"></img>
+            <b>Adam Lang</b>
+         </div>
+         <div class="margin-left20">
+            <p>Great! Can you please approve them.</p>
+         </div>
+         <div class="send-box">
+            <textarea name="issue" cols="40" rows="3" class="textarea" id="new_msg"></textarea>
+         </div>
+         <a  class="btn btn-primary">Send</a>
+         <div class="send-copy">
+            <input id="send_copy" type="checkbox"><label for="send_copy" style="margin-left:10px;">Send me a copy</label>
+         </div>
+      </div>
+   </div>
+</div>
+<style type='text/css'>
+   .margin-left20 {
+   margin-left: 20px;
+   }
+   .margin-right20 {
+   margin-righ: 20px;
+   }
+   /* .chat-exchanges {
+   margin-left: 20px;
+   }*/
+   .send-box {
+   padding-bottom:  0px;  
+   }
+   .send-copy {
+   margin-top: 10px; 
+   margin-left: 10px;
+   }
+</style>
+
+{% endblock %}

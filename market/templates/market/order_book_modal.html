@@ -1,0 +1,102 @@
+{% load static %}
+<!-- Modal -->
+<div class="modal fade" id="createOrderModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="">
+   <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+         <div class="modal-header text-center">
+            <h4 class="modal-title w-100" id="myModalLabel">Place an order</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+         </div>
+         <div class="modal-body">
+            <div id="errors" style="color: red" class="text-center"></div>
+              <form method="POST" action="{% url 'market:create_order' %}" id="orderBookForm">
+                 {% csrf_token %}
+                  <div class="row">
+                  <div class="col" style="font-weight: bold;">
+                     <div class="row offset-5">
+                        <input type="hidden" id="companyID" value="{{company_id}}">
+                        <input type="hidden" name="execution_price" id="id_company_name" value="">
+                       {{player_name}}
+                     </div>
+                     <div class="row offset-5">
+                        <input type="hidden" name="execution_price" id="id_execution_price" value="{{player_cmp}}">
+                       <p>Current Market Price: </p>&nbsp&nbsp&nbsp<b>{{player_cmp}}</b>
+                     </div>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-lg-6">
+                           
+                           <label>Quantity</label>
+                           <input type="text" name="quantity" id="id_quantity">
+
+                        </div>
+                        <div class="col-lg-6">
+                           <label>Trade type</label>
+                           <input type="text" name="mode" value="Market" readonly="true" disabled="">
+                        </div>
+                     </div>
+                    <div style="margin-top: 50px;">
+                    </div>
+                  </div>
+                </div>
+              </form>
+         </div>
+         <div class="modal-footer">
+            {% if not buy_order %}
+                <button type="submit" class="btn-grn buy_order_review">Review Buy Order</button>
+            {% else %}
+                <button type="submit" class="btn-red sell_order_review" form="modal-details">Review Sell Order</button>
+            {% endif %}
+         </div>
+      </div>
+      <!--  -->
+      <div class="d-none" id="OrderPlacingModalContent">
+         <div class="modal-header text-center">
+            <h4 class="modal-title w-100" id="myModalLabel">Order Details :{{company}}</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+         </div>
+         <div class="modal-body">
+            <!-- post data variables -->
+            <input type="hidden" id="companyID" value="{{company_id}}">
+            <input type="hidden" name="quantity" id="id_quantity" value="{{quantity}}">
+            <input type="hidden" name="execution_price" id="id_execution_price" value="{{execution_price}}">
+            <div class="row offset-1">
+               <div class="col">
+                  <div class="row">
+                     <div class="col-lg-9">
+                        Company: {{player_name}}({{player_code}})
+                     </div>
+                  </div>
+                  <hr/>
+                  <div class="row">
+                     <div class="col-lg-9">
+                        Execution Price: {{execution_price}}
+                     </div>
+                  </div>
+                  <hr/>
+                  <div class="row">
+                     <div class="col-lg-9">
+                        Quantity: {{quantity}}
+                     </div>
+                  </div>
+                  <hr/>
+                  <div class="row">
+                     <div class="col-lg-9">
+                        Total Amount: {{total_amount}}
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="modal-footer">
+            {% if not buy_order %}
+                <button type="submit" class="btn-grn buy_order fas fa-shopping-cart"> Place Buy Order</button>
+            {% else %}
+                <button type="submit" class="btn-red sell_order fas fa-shopping-cart"> Place Sell Order</button>
+            {% endif %}
+         </div>
+      </div>
+      <!--  -->
+   </div>
+</div>
+<!-- Modal popup end -->

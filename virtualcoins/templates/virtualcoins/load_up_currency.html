@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+   
+   <div class="row">
+      <div class="col-lg-6 offset-3">
+         <div class="card h-100" style="min-height: 800px; max-height: 800px;">
+            <div class="card-body bg-grey d-flex flex-column">
+               <div class="row">
+                  <div class="col-lg-6 bring-center">
+                     <img class="img-responsive pb-logo lazyloaded" src="{{razorpay.logo.url}}" width="160"/>
+                  </div>
+                  <div class="col-lg-6 bring-center">
+                     <img class="img-responsive pb-logo lazyloaded" src="{{paypal.logo.url}}" width="160"/>
+                  </div>
+               </div>
+
+               <div class="row">
+                  <div class="col mt-10">
+                     <form action="{% url 'virtualcoins:load_up' %}" method="post">
+                        {% csrf_token %}
+                        <fieldset>
+                           <input type="hidden" name="payment_brand" value="razorpay">
+                           <div class="form-row ">
+                              <div class="col-12 mt-5">
+                                 <div id="div_id_username" class="form-group">
+                                    <h5><label for="id_username" class="bold-text bring-center requiredField">Cric Trade Coins<span class="asteriskField">*</span> </label> 
+                                    </h5>
+                                    <div class=""> <input type="text" name="virtual_coins" autofocus="" class="textinput textInput form-control bring-center" required="" id="id_virtual_coins" placeholder="In multiple of 1000"> </div> </div>
+                              </div>
+                              <div class="col-12 mt-5">
+                                 <div id="div_id_username" class="form-group">
+                                    <h5><label for="id_username" class="bold-text bring-center requiredField">Amount<span class="asteriskField">*</span> </label> 
+                                    </h5>
+                                    <div class=""> <input type="text" name="amount" autofocus="" class="textinput textInput form-control bring-center" required="" id="id_amount"></div> </div>
+                              </div>
+                              <div class="col-12 mt-5 mb-5">
+                                 <div id="div_id_password" class="form-group">
+                                    <h5>
+                                       <label for="id_password" class="bold-text bring-center">Bonus Code</label> 
+                                    </h5>
+                                    <div class=""> <input type="text" name="bonus_code" class="textinput textInput form-control bring-center"  id="id_bonus_code"> </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="form-group"> <div class=""> <input type="submit" name="submit" value="Load Up" class="btn btn-primary btn btn-block" id="submit-id-submit"> </div>
+                           </div>
+                        </fieldset>
+                     </form>
+                     {% if payment %}
+                        <form action="{% url 'payments:payment_status' %}" method="POST">
+                            {% csrf_token %}
+                            <script
+                                 src="https://checkout.razorpay.com/v1/checkout.js"
+                                 data-key={{client_id}}
+                                 data-amount="{{ razorpay_response.amount }}"
+                                 data-currency="{{ razorpay_response.currency }}"
+                                 data-order_id="{{ razorpay_response.id }}"
+                                 data-buttontext="Pay with Razorpay"
+                                 data-name="Cric Trade"
+                                 data-description="Fantasy league cricket combined with trading"
+                                 data-image="https://example.com/your_logo.jpg"
+                                 data-prefill.name="{{user.full_name}}"
+                                 data-prefill.email="{{user.email}}"
+                                 data-theme.color="#F37254"
+                            ></script>
+                            <input type="hidden" custom="Hidden Element" name="hidden">
+                        </form>
+                     {% endif %}
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+{% endblock %}
+
+{% block css_files %}
+
+<style type="text/css">
+   .hr1 {
+        border: 0;
+        height: 3px;
+        background: #095484;
+        background-image: linear-gradient(to right, #ccc, #095484, #ccc);
+      }
+      input {
+text-align: center;
+}
+</style>
+{% endblock %}

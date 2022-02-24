@@ -1,0 +1,8 @@
+{% extends 'base.html' %} {% block base_head %}
+{% csrf_token %}
+<title>Register</title>
+{% endblock %} {% block content %}
+
+{% include 'accounts/snippets/form.html' with form=form heading=heading button_text='Sign Up' %}
+
+{% endblock %}

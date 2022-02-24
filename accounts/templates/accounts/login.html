@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags static %}
+
+{% block base_head %}
+	{% csrf_token %}
+	<title>Login</title>
+{% endblock %}
+
+{% block content %}
+    <section class="form_bg">
+        <div class="container">
+            <div class="form_container">
+                <div class="form_header">
+                    <a href="index.html" class="registration_logo">
+                        <img src="{% static '' %}" alt="Champhunt Logo">
+                    </a>
+                </div>
+                <form action="{% url 'accounts:login' %}" method="POST" class="mt-60">
+                    {% csrf_token %}
+                    <h1 class="form_title">Log in</h1>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" placeholder="Enter Your Email" class="form-control para" id="email" required="required" name="username">
+                    </div>
+                    <div class="mb-3">
+                        <label for="password-field" class="form-label">Password</label>
+                        <div class="show_password">
+                            <input type="password" placeholder="Enter Your Password" class="form-control para" id="password-field" required="required" name="password">
+                            <i class="fas fa-eye toggle-password"></i>
+                        </div>
+                        <a href="#" class="para" id="forgot">Forgot Password?</a>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+
+                </form>
+                <div class="form_footer">
+                    <span>OR</span>
+                    <div class="social_container d-flex align-items-center">
+                        <div class="facebook">
+                            <a href="#" class="para d-flex align-items-center justify-content-evenly"><img src="{% static 'img/facebook.png' %}" alt="Sign Up With Facebook">FACEBOOK</a>
+                        </div>
+                        <div class="google">
+                            <a href="#" class="para d-flex align-items-center justify-content-evenly"><img src="{% static 'img/google.png' %}" alt="Sign Up With Google"> GOOGLE</a>
+                        </div>
+                    </div>
+                    <p class="para">I don't have an account. <a href="{% url 'accounts:register' %}">Sign Up</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}

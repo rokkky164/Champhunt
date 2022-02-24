@@ -1,0 +1,91 @@
+{% extends 'market/market_index.html' %}
+{% load crispy_forms_tags static %}
+
+{% block javascript %}
+    <script type="text/javascript">
+        var chart_type = "{{ chart_type }}";
+    </script>
+    <script src="{% static 'js/chart.js' %}"></script>
+    <script src="{% static 'js/cmp_socket.js' %}"></script>
+{% endblock%}
+
+{% block inner_left %}
+    <!-- Hidden variables -->
+    <input type="hidden" id="chart_type" value="line">
+    <input type="hidden" id="stock" value="10">
+    <!--  -->
+    <div class="crictext">Brendon Mc Cullum</div>
+    <div id="stock_chart"></div>
+    <div class="range_wrapper">
+        <div class="btns text-center">
+            <button class="btn trd_tab activeb" data-tab="buy">BUY SHARES</button>
+            <button class="btn trd_tab" data-tab="sell">SELL SHARES</button>
+        </div>
+        <div id="buy" style="background-image: url('assets/images/profile/trade_bg.png');" class="trade_tab activet">
+            <div class="content">
+                <p class="tit">Amount of Shares to Buy</p>
+                <div class="wrap text-center">
+                    <div class="rangee_wrapper d-inline-flex align-items-center">
+                        <div class="minus d-flex align-items-center justify-content-center">
+                            <i class="fas fa-minus"></i>
+                        </div>
+                        <div class="number d-flex align-items-center justify-content-center">
+                            <p>10</p>
+                        </div>
+                        <div class="plus d-flex align-items-center justify-content-center">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="txt_wrapper text-center">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <p class="sha">10 Shares * $1.85: </p>
+                        <p class="val">$18.50</p>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <p class="sha">2.5% Fee: </p>
+                        <p class="val">$0.46</p>
+                    </div>
+                    <div class="tot d-flex align-items-center justify-content-between">
+                        <p class="sha">Total: </p>
+                        <p class="val">$18.96</p>
+                    </div>
+                     <a href="#">BUY SHARES NOW</a>
+                </div>
+            </div>
+        </div>
+        <div id="sell" style="background-image: url('assets/images/profile/trade_bg.png');" class="trade_tab">
+            <div class="content">
+                <p class="tit">Amount of Shares to Buy</p>
+                <div class="wrap text-center">
+                    <div class="rangee_wrapper d-inline-flex align-items-center">
+                        <div class="minus d-flex align-items-center justify-content-center">
+                            <i class="fas fa-minus"></i>
+                        </div>
+                        <div class="number d-flex align-items-center justify-content-center">
+                            <p>10</p>
+                        </div>
+                        <div class="plus d-flex align-items-center justify-content-center">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="txt_wrapper text-center">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <p class="sha">10 Shares * $1.85: </p>
+                        <p class="val">$18.50</p>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <p class="sha">2.5% Fee: </p>
+                        <p class="val">$0.46</p>
+                    </div>
+                    <div class="tot d-flex align-items-center justify-content-between">
+                        <p class="sha">Total: </p>
+                        <p class="val">$18.96</p>
+                    </div>
+                     <a href="#">BUY SHARES NOW</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

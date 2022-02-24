@@ -1,0 +1,1066 @@
+{% extends 'market/market_index.html' %}
+{% load static %}
+{% load market_filters %}
+
+{% block additional_meta %}
+    <meta name="application-messages" content="{{ messages|message_to_json }}"/>
+{% endblock %}
+
+{% block inner_left %}
+	
+<div class="cover_img d-flex align-items-end align-items-md-end" style="background-image: url('assets/images/user/illustration.png');">
+    <div class="profile_lg_wrapper d-flex align-items-center align-items-md-end">
+        <div class="profile_info">
+            <p>{{user.country}}</p>
+            <a href="{% url 'accounts:user_profile' user.pk %}">{{user.username}}</a>
+        </div>
+    </div>
+</div>
+<div class="profile_info_wrapper">
+    <div class="row tag_icon_wrapper d-flex align-items-center justify-content-between">
+        <div class="col-sm-5 follow_wrapper d-flex align-items-center justify-content-between justify-content-sm-around">
+            <div class="follower d-flex align-items-center justify-content-between">
+                <div class="icon">
+                    <i class="flaticon-user-profile"></i>
+                </div>
+                <div class="amount">
+                    <a href="#followers">2,239</a>
+                    <p>FOLLOWERS</p>
+                </div>
+            </div>
+            <div class="following d-flex align-items-center justify-content-between">
+                <div class="icon">
+                    <i class="flaticon-user-profile"></i>
+                </div>
+                <div class="amount">
+                    <a href="#followers">5,339</a>
+                    <p>FOLLOWING</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="tab_wrapper">
+    <div class="row tab_btn_row d-flex align-items-center justify-content-between">
+        <div class="tab_btn_wrapper col-sm-8 order-last order-sm-first text-center text-sm-start">
+            <button class="btn tab_btn active" data-tab="about">About</button>
+            <div class="f_drop">
+                <button class="btn dr_btn">Followers <i class="fas fa-sort-down"></i></button>
+                <div class="f_con" style="display: none;">
+                    <button class="btn tab_btn" data-tab="followers">Layout One</button>
+                    <button class="btn tab_btn" data-tab="followers2">Layout Two</button>
+                </div>
+            </div>
+            <button class="btn tab_btn" data-tab="stats">Stats</button>
+        </div>
+        <div class="social_wrapper col-sm-4 text-center text-sm-end">
+            <a href="#" class="fb d-inline-flex align-items-center justify-content-center">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="tw d-inline-flex align-items-center justify-content-center">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="ins d-inline-flex align-items-center justify-content-center">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
+    </div>
+    <div id="about" class="profile_tab active">
+        <h3>About</h3>
+        <p class="para"></p>
+        <ul>
+            <li>
+                <i class="fas fa-angle-right"></i> {{user.username}}
+            </li>
+            <li>
+                <i class="fas fa-angle-right"></i>{{user.email}}
+            </li>
+            <li>
+                <i class="fas fa-angle-right"></i> {{user.mobile}}
+            </li>
+        </ul>
+    </div>
+
+    <div id="followers" class="profile_tab">
+        <div class="search_wrapper">
+            <form action="#" method="post" id="searchFriend" class="search_wrapper d-md-flex align-items-center justify-content-between">
+                <div class="input_wrapper">
+                    <input type="search" name="searchFriend" id="searchFriends" placeholder="Search Friends" required="required">
+                    <i class="flaticon-loupe"></i>
+                </div>
+                <div class="submit_wrapper">
+                    <button type="submit" class="d-flex align-items-center" title="Find Your Friends">
+                        <i class="fas fa-users"></i> Find Friends
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="row followers_row_first">
+            <div class="col-lg-6">
+                <div class="left_col">
+                    <div class="d-sm-flex align-items-center justify-content-around">
+                        <div class="friends_wrapper d-sm-flex align-items-center justify-content-between">
+                            <div class="profile_wrapper">
+                                <div class="profile_content">
+                                    <a href="player-profile.html" class="profile">
+                                        <!--====small profile picture start====-->
+                                        <img src="assets/images/followers/gera.png" alt="Profile Picture">
+                                        <!--====small profile picture end====-->
+                                    </a>
+                                    <span class="d-flex align-items-center justify-content-center">18</span>
+                                </div>
+                            </div>
+                            <div class="info_wrapper text-center text-sm-start">
+                                <a href="player-profile.html" class="name">Gerard Cain</a>
+                                <p class="percentage">ROI 21%</p>
+                            </div>
+                        </div>
+                        <div class="icon_wrapper text-center text-sm-start">
+                            <a href="league.html" class="d-inline-flex align-items-center justify-content-center">
+                                <i class="flaticon-basketball-ball-variant"></i>
+                            </a>
+                            <a href="league.html" class="d-inline-flex align-items-center justify-content-center">
+                                <i class="flaticon-rugby"></i>
+                            </a>
+                            <a href="league.html" class="d-inline-flex align-items-center justify-content-center">
+                                <i class="flaticon-baseball-ball-1"></i>
+                            </a>
+                            <a href="league.html" class="d-inline-flex align-items-center justify-content-center">
+                                <i class="flaticon-golf"></i>
+                            </a>
+                        </div>
+                        <div class="follow_wrapper text-center text-sm-start">
+                            <a href="#">Unfollow</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="left_col">
+                    <div class="d-sm-flex align-items-center justify-content-around">
+                        <div class="friends_wrapper d-sm-flex align-items-center justify-content-between">
+                            <div class="profile_wrapper">
+                                <div class="profile_content">
+                                    <a href="player-profile.html" class="profile">
+                                        <!--====small profile picture start====-->
+                                        <img src="assets/images/followers/eva.png" alt="Profile Picture">
+                                        <!--====small profile picture end====-->
+                                    </a>
+                                    <span class="d-flex align-items-center justify-content-center">28</span>
+                                </div>
+                            </div>
+                            <div class="info_wrapper text-center text-sm-start">
+                                <a href="player-profile.html" class="name">Eva Doyle</a>
+                                <p class="percentage">ROI 21%</p>
+                            </div>
+                        </div>
+                        <div class="icon_wrapper text-center text-sm-start">
+                            <a href="league.html" class="d-inline-flex align-items-center justify-content-center">
+                                <i class="flaticon-basketball-ball-variant"></i>
+                            </a>
+                            <a href="league.html" class="d-inline-flex align-items-center justify-content-center">
+                                <i class="flaticon-rugby"></i>
+                            </a>
+                            <a href="league.html" class="d-inline-flex align-items-center justify-content-center">
+                                <i class="flaticon-baseball-ball-1"></i>
+                            </a>
+                            <a href="league.html" class="d-inline-flex align-items-center justify-content-center">
+                                <i class="flaticon-golf"></i>
+                            </a>
+                        </div>
+                        <div class="follow_wrapper text-center text-sm-start">
+                            <a href="league.html">Unfollow</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row followers_row_first">
+            <div class="col-lg-6">
+                <div class="left_col">
+                    <div class="d-sm-flex align-items-center justify-content-around">
+                        <div class="friends_wrapper d-sm-flex align-items-center justify-content-between">
+                            <div class="profile_wrapper">
+                                <div class="profile_content">
+                                    <a href="player-profile.html" class="profile">
+                                        <!--====small profile picture start====-->
+                                        <img src="assets/images/followers/greg.png" alt="Profile Picture">
+                                        <!--====small profile picture end====-->
+                                    </a>
+                                    <span class="d-flex align-items-center justify-content-center">22</span>
+                                </div>
+                            </div>
+                            <div class="info_wrapper text-center text-sm-start">
+                                <a href="player-profile.html" class="name">Greg Hardy</a>
+                                <p class="percentage">ROI 21%</p>
+                            </div>
+                        </div>
+                        <div class="icon_wrapper text-center text-sm-start">
+                            <a href="league.html" class="d-inline-flex align-items-center justify-content-center">
+                                <i class="flaticon-basketball-ball-variant"></i>
+                            </a>
+                            <a href="league.html" class="d-inline-flex align-items-center justify-content-center">
+                                <i class="flaticon-rugby"></i>
+                            </a>
+                            <a href="league.html" class="d-inline-flex align-items-center justify-content-center">
+                                <i class="flaticon-baseball-ball-1"></i>
+                            </a>
+                            <a href="league.html" class="d-inline-flex align-items-center justify-content-center">
+                                <i class="flaticon-golf"></i>
+                            </a>
+                        </div>
+                        <div class="follow_wrapper text-center text-sm-start">
+                            <a href="#">Unfollow</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="left_col">
+                    <div class="d-sm-flex align-items-center justify-content-around">
+                        <div class="friends_wrapper d-sm-flex align-items-center justify-content-between">
+                            <div class="profile_wrapper">
+                                <div class="profile_content">
+                                    <a href="player-profile.html" class="profile">
+                                        <!--====small profile picture start====-->
+                                        <img src="assets/images/followers/wise.png" alt="Profile Picture">
+                                        <!--====small profile picture end====-->
+                                    </a>
+                                    <span class="d-flex align-items-center justify-content-center">16</span>
+                                </div>
+                            </div>
+                            <div class="info_wrapper text-center text-sm-start">
+                                <a href="player-profile.html" class="name">Horace Wise</a>
+                                <p class="percentage">ROI 21%</p>
+                            </div>
+                        </div>
+                        <div class="icon_wrapper text-center text-sm-start">
+                            <a href="league.html" class="d-inline-flex align-items-center justify-content-center">
+                                <i class="flaticon-basketball-ball-variant"></i>
+                            </a>
+                            <a href="league.html" class="d-inline-flex align-items-center justify-content-center">
+                                <i class="flaticon-rugby"></i>
+                            </a>
+                            <a href="league.html" class="d-inline-flex align-items-center justify-content-center">
+                                <i class="flaticon-baseball-ball-1"></i>
+                            </a>
+                            <a href="league.html" class="d-inline-flex align-items-center justify-content-center">
+                                <i class="flaticon-golf"></i>
+                            </a>
+                        </div>
+                        <div class="follow_wrapper text-center text-sm-start">
+                            <a href="#">Unfollow</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row followers_row_first">
+            <div class="col-lg-6">
+                <div class="left_col">
+                    <div class="d-sm-flex align-items-center justify-content-around">
+                        <div class="friends_wrapper d-sm-flex align-items-center justify-content-between">
+                            <div class="profile_wrapper">
+                                <div class="profile_content">
+                                    <a href="player-profile.html" class="profile">
+                                        <!--====small profile picture start====-->
+                                        <img src="assets/images/followers/boone.png" alt="Profile Picture">
+                                        <!--====small profile picture end====-->
+                                    </a>
+                                    <span class="d-flex align-items-center justify-content-center">13</span>
+                                </div>
+                            </div>
+                            <div class="info_wrapper text-center text-sm-start">
+                                <a href="player-profile.html" class="name">Willie Boone</a>
+                                <p class="percentage">ROI 21%</p>
+                            </div>
+                        </div>
+                        <div class="icon_wrapper text-center text-sm-start">
+                            <a href="league.html" class="d-inline-flex align-items-center justify-content-center">
+                                <i class="flaticon-basketball-ball-variant"></i>
+                            </a>
+                            <a href="league.html" class="d-inline-flex align-items-center justify-content-center">
+                                <i class="flaticon-rugby"></i>
+                            </a>
+                            <a href="league.html" class="d-inline-flex align-items-center justify-content-center">
+                                <i class="flaticon-baseball-ball-1"></i>
+                            </a>
+                            <a href="league.html" class="d-inline-flex align-items-center justify-content-center">
+                                <i class="flaticon-golf"></i>
+                            </a>
+                        </div>
+                        <div class="follow_wrapper text-center text-sm-start">
+                            <a href="#">Unfollow</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="left_col">
+                    <div class="d-sm-flex align-items-center justify-content-around">
+                        <div class="friends_wrapper d-sm-flex align-items-center justify-content-between">
+                            <div class="profile_wrapper">
+                                <div class="profile_content">
+                                    <a href="player-profile.html" class="profile">
+                                        <!--====small profile picture start====-->
+                                        <img src="assets/images/followers/alyssa.png" alt="Profile Picture">
+                                        <!--====small profile picture end====-->
+                                    </a>
+                                    <span class="d-flex align-items-center justify-content-center">19</span>
+                                </div>
+                            </div>
+                            <div class="info_wrapper text-center text-sm-start">
+                                <a href="player-profile.html" class="name">Alyssa loyd</a>
+                                <p class="percentage">ROI 21%</p>
+                            </div>
+                        </div>
+                        <div class="icon_wrapper text-center text-sm-start">
+                            <a href="league.html" class="d-inline-flex align-items-center justify-content-center">
+                                <i class="flaticon-basketball-ball-variant"></i>
+                            </a>
+                            <a href="league.html" class="d-inline-flex align-items-center justify-content-center">
+                                <i class="flaticon-rugby"></i>
+                            </a>
+                            <a href="league.html" class="d-inline-flex align-items-center justify-content-center">
+                                <i class="flaticon-baseball-ball-1"></i>
+                            </a>
+                            <a href="league.html" class="d-inline-flex align-items-center justify-content-center">
+                                <i class="flaticon-golf"></i>
+                            </a>
+                        </div>
+                        <div class="follow_wrapper text-center text-sm-start">
+                            <a href="#">Unfollow</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row followers_row_first">
+            <div class="col-lg-6">
+                <div class="left_col">
+                    <div class="d-sm-flex align-items-center justify-content-around">
+                        <div class="friends_wrapper d-sm-flex align-items-center justify-content-between">
+                            <div class="profile_wrapper">
+                                <div class="profile_content">
+                                    <a href="player-profile.html" class="profile">
+                                        <!--====small profile picture start====-->
+                                        <img src="assets/images/followers/lionel.png" alt="Profile Picture">
+                                        <!--====small profile picture end====-->
+                                    </a>
+                                    <span class="d-flex align-items-center justify-content-center">27</span>
+                                </div>
+                            </div>
+                            <div class="info_wrapper text-center text-sm-start">
+                                <a href="player-profile.html" class="name">Lionel Moody</a>
+                                <p class="percentage">ROI 21%</p>
+                            </div>
+                        </div>
+                        <div class="icon_wrapper text-center text-sm-start">
+                            <a href="league.html" class="d-inline-flex align-items-center justify-content-center">
+                                <i class="flaticon-basketball-ball-variant"></i>
+                            </a>
+                            <a href="league.html" class="d-inline-flex align-items-center justify-content-center">
+                                <i class="flaticon-rugby"></i>
+                            </a>
+                            <a href="league.html" class="d-inline-flex align-items-center justify-content-center">
+                                <i class="flaticon-baseball-ball-1"></i>
+                            </a>
+                            <a href="league.html" class="d-inline-flex align-items-center justify-content-center">
+                                <i class="flaticon-golf"></i>
+                            </a>
+                        </div>
+                        <div class="follow_wrapper text-center text-sm-start">
+                            <a href="#">Unfollow</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="left_col">
+                    <div class="d-sm-flex align-items-center justify-content-around">
+                        <div class="friends_wrapper d-sm-flex align-items-center justify-content-between">
+                            <div class="profile_wrapper">
+                                <div class="profile_content">
+                                    <a href="player-profile.html" class="profile">
+                                        <!--====small profile picture start====-->
+                                        <img src="assets/images/followers/joanna.png" alt="Profile Picture">
+                                        <!--====small profile picture end====-->
+                                    </a>
+                                    <span class="d-flex align-items-center justify-content-center">18</span>
+                                </div>
+                            </div>
+                            <div class="info_wrapper text-center text-sm-start">
+                                <a href="player-profile.html" class="name">Joanna Grey</a>
+                                <p class="percentage">ROI 21%</p>
+                            </div>
+                        </div>
+                        <div class="icon_wrapper text-center text-sm-start">
+                            <a href="league.html" class="d-inline-flex align-items-center justify-content-center">
+                                <i class="flaticon-basketball-ball-variant"></i>
+                            </a>
+                            <a href="league.html" class="d-inline-flex align-items-center justify-content-center">
+                                <i class="flaticon-rugby"></i>
+                            </a>
+                            <a href="league.html" class="d-inline-flex align-items-center justify-content-center">
+                                <i class="flaticon-baseball-ball-1"></i>
+                            </a>
+                            <a href="league.html" class="d-inline-flex align-items-center justify-content-center">
+                                <i class="flaticon-golf"></i>
+                            </a>
+                        </div>
+                        <div class="follow_wrapper text-center text-sm-start">
+                            <a href="#">Unfollow</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row followers_row_first">
+        </div>
+        <div class="show_wrapper text-center">
+            <a href="#">View More</a>
+        </div>
+    </div>
+    <div id="followers2" class="profile_tab">
+        <div class="search_wrapper">
+            <form action="#" method="post" id="searchFriend2" class="search_wrapper d-md-flex align-items-center justify-content-between">
+                <div class="input_wrapper">
+                    <input type="search" name="searchFriend" id="searchFriends2" placeholder="Search Friends" required="required">
+                    <i class="flaticon-loupe"></i>
+                </div>
+                <div class="submit_wrapper">
+                    <button type="submit" class="d-flex align-items-center" title="Find Your Friends">
+                        <i class="fas fa-users"></i> Find Friends
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="row followers_two_row">
+            <div class="col-sm-6 col-md-6 col-lg-4 col-xxl-3">
+                <div class="followers_col">
+                    <div class="member_wrapper">
+                        <div class="bg_head">
+                            <img src="assets/images/followers/kurt_bg.png" alt="Cover Image">
+                        </div>
+                        <div class="profile_wrapper text-center">
+                            <div class="profile_content">
+                                <a href="#" class="profile">
+                                    <!--====small profile picture start====-->
+                                    <img src="assets/images/followers/kurt.png" alt="Profile Picture">
+                                    <!--====small profile picture end====-->
+                                </a>
+                                <span class="d-flex align-items-center justify-content-center">18</span>
+                            </div>
+                            <h5 class="text-center">
+                                <a href="player-profile.html">KURT SHAW</a>
+                            </h5>
+                        </div>
+                        <div class="follow_wrapper d-flex align-items-center justify-content-around">
+                            <div class="follower d-flex align-items-center justify-content-between">
+                                <div class="icon">
+                                    <i class="flaticon-user-profile"></i>
+                                </div>
+                                <div class="amount">
+                                    <a href="#">2,239</a>
+                                    <p>FOLLOWERS</p>
+                                </div>
+                            </div>
+                            <div class="following d-flex align-items-center justify-content-between">
+                                <div class="icon">
+                                    <i class="flaticon-user-profile"></i>
+                                </div>
+                                <div class="amount">
+                                    <a href="">5,339</a>
+                                    <p>FOLLOWING</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="follow_btn text-center">
+                            <a href="#">FOLLOW</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-4 col-xxl-3">
+                <div class="followers_col">
+                    <div class="member_wrapper">
+                        <div class="bg_head">
+                            <img src="assets/images/followers/dennis_bg.png" alt="Cover Image">
+                        </div>
+                        <div class="profile_wrapper text-center">
+                            <div class="profile_content">
+                                <a href="#" class="profile">
+                                    <!--====small profile picture start====-->
+                                    <img src="assets/images/followers/dennis.png" alt="Profile Picture">
+                                    <!--====small profile picture end====-->
+                                </a>
+                                <span class="d-flex align-items-center justify-content-center">18</span>
+                            </div>
+                            <h5 class="text-center">
+                                <a href="player-profile.html">DENNIS MEYER</a>
+                            </h5>
+                        </div>
+                        <div class="follow_wrapper d-flex align-items-center justify-content-around">
+                            <div class="follower d-flex align-items-center justify-content-between">
+                                <div class="icon">
+                                    <i class="flaticon-user-profile"></i>
+                                </div>
+                                <div class="amount">
+                                    <a href="#">2,239</a>
+                                    <p>FOLLOWERS</p>
+                                </div>
+                            </div>
+                            <div class="following d-flex align-items-center justify-content-between">
+                                <div class="icon">
+                                    <i class="flaticon-user-profile"></i>
+                                </div>
+                                <div class="amount">
+                                    <a href="">5,339</a>
+                                    <p>FOLLOWING</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="follow_btn text-center">
+                            <a href="#">FOLLOW</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-4 col-xxl-3">
+                <div class="followers_col">
+                    <div class="member_wrapper">
+                        <div class="bg_head">
+                            <img src="assets/images/followers/lyle_bg.png" alt="Cover Image">
+                        </div>
+                        <div class="profile_wrapper text-center">
+                            <div class="profile_content">
+                                <a href="#" class="profile">
+                                    <!--====small profile picture start====-->
+                                    <img src="assets/images/followers/lyle.png" alt="Profile Picture">
+                                    <!--====small profile picture end====-->
+                                </a>
+                                <span class="d-flex align-items-center justify-content-center">18</span>
+                            </div>
+                            <h5 class="text-center">
+                                <a href="player-profile.html">LYLE REED</a>
+                            </h5>
+                        </div>
+                        <div class="follow_wrapper d-flex align-items-center justify-content-around">
+                            <div class="follower d-flex align-items-center justify-content-between">
+                                <div class="icon">
+                                    <i class="flaticon-user-profile"></i>
+                                </div>
+                                <div class="amount">
+                                    <a href="#">2,239</a>
+                                    <p>FOLLOWERS</p>
+                                </div>
+                            </div>
+                            <div class="following d-flex align-items-center justify-content-between">
+                                <div class="icon">
+                                    <i class="flaticon-user-profile"></i>
+                                </div>
+                                <div class="amount">
+                                    <a href="">5,339</a>
+                                    <p>FOLLOWING</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="follow_btn text-center">
+                            <a href="#">FOLLOW</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-4 col-xxl-3">
+                <div class="followers_col">
+                    <div class="member_wrapper">
+                        <div class="bg_head">
+                            <img src="assets/images/followers/larry_bg.png" alt="Cover Image">
+                        </div>
+                        <div class="profile_wrapper text-center">
+                            <div class="profile_content">
+                                <a href="#" class="profile">
+                                    <!--====small profile picture start====-->
+                                    <img src="assets/images/followers/larry.png" alt="Profile Picture">
+                                    <!--====small profile picture end====-->
+                                </a>
+                                <span class="d-flex align-items-center justify-content-center">18</span>
+                            </div>
+                            <h5 class="text-center">
+                                <a href="player-profile.html">LARRY CHAVEZ</a>
+                            </h5>
+                        </div>
+                        <div class="follow_wrapper d-flex align-items-center justify-content-around">
+                            <div class="follower d-flex align-items-center justify-content-between">
+                                <div class="icon">
+                                    <i class="flaticon-user-profile"></i>
+                                </div>
+                                <div class="amount">
+                                    <a href="#">2,239</a>
+                                    <p>FOLLOWERS</p>
+                                </div>
+                            </div>
+                            <div class="following d-flex align-items-center justify-content-between">
+                                <div class="icon">
+                                    <i class="flaticon-user-profile"></i>
+                                </div>
+                                <div class="amount">
+                                    <a href="">5,339</a>
+                                    <p>FOLLOWING</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="follow_btn text-center">
+                            <a href="#">FOLLOW</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row followers_two_row">
+            <div class="col-sm-6 col-md-6 col-lg-4 col-xxl-3">
+                <div class="followers_col">
+                    <div class="member_wrapper">
+                        <div class="bg_head">
+                            <img src="assets/images/followers/debra_bg.png" alt="Cover Image">
+                        </div>
+                        <div class="profile_wrapper text-center">
+                            <div class="profile_content">
+                                <a href="#" class="profile">
+                                    <!--====small profile picture start====-->
+                                    <img src="assets/images/followers/debra.png" alt="Profile Picture">
+                                    <!--====small profile picture end====-->
+                                </a>
+                                <span class="d-flex align-items-center justify-content-center">18</span>
+                            </div>
+                            <h5 class="text-center">
+                                <a href="player-profile.html">DEBRA YATES</a>
+                            </h5>
+                        </div>
+                        <div class="follow_wrapper d-flex align-items-center justify-content-around">
+                            <div class="follower d-flex align-items-center justify-content-between">
+                                <div class="icon">
+                                    <i class="flaticon-user-profile"></i>
+                                </div>
+                                <div class="amount">
+                                    <a href="#">2,239</a>
+                                    <p>FOLLOWERS</p>
+                                </div>
+                            </div>
+                            <div class="following d-flex align-items-center justify-content-between">
+                                <div class="icon">
+                                    <i class="flaticon-user-profile"></i>
+                                </div>
+                                <div class="amount">
+                                    <a href="">5,339</a>
+                                    <p>FOLLOWING</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="follow_btn text-center">
+                            <a href="#">FOLLOW</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-4 col-xxl-3">
+                <div class="followers_col">
+                    <div class="member_wrapper">
+                        <div class="bg_head">
+                            <img src="assets/images/followers/megan_bg.png" alt="Cover Image">
+                        </div>
+                        <div class="profile_wrapper text-center">
+                            <div class="profile_content">
+                                <a href="#" class="profile">
+                                    <!--====small profile picture start====-->
+                                    <img src="assets/images/followers/megan.png" alt="Profile Picture">
+                                    <!--====small profile picture end====-->
+                                </a>
+                                <span class="d-flex align-items-center justify-content-center">18</span>
+                            </div>
+                            <h5 class="text-center">
+                                <a href="player-profile.html">MEGAN JENSEN</a>
+                            </h5>
+                        </div>
+                        <div class="follow_wrapper d-flex align-items-center justify-content-around">
+                            <div class="follower d-flex align-items-center justify-content-between">
+                                <div class="icon">
+                                    <i class="flaticon-user-profile"></i>
+                                </div>
+                                <div class="amount">
+                                    <a href="#">2,239</a>
+                                    <p>FOLLOWERS</p>
+                                </div>
+                            </div>
+                            <div class="following d-flex align-items-center justify-content-between">
+                                <div class="icon">
+                                    <i class="flaticon-user-profile"></i>
+                                </div>
+                                <div class="amount">
+                                    <a href="">5,339</a>
+                                    <p>FOLLOWING</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="follow_btn text-center">
+                            <a href="#">FOLLOW</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-4 col-xxl-3">
+                <div class="followers_col">
+                    <div class="member_wrapper">
+                        <div class="bg_head">
+                            <img src="assets/images/followers/sam_bg.png" alt="Cover Image">
+                        </div>
+                        <div class="profile_wrapper text-center">
+                            <div class="profile_content">
+                                <a href="#" class="profile">
+                                    <!--====small profile picture start====-->
+                                    <img src="assets/images/followers/sam.png" alt="Profile Picture">
+                                    <!--====small profile picture end====-->
+                                </a>
+                                <span class="d-flex align-items-center justify-content-center">18</span>
+                            </div>
+                            <h5 class="text-center">
+                                <a href="player-profile.html">SAM GILBERT</a>
+                            </h5>
+                        </div>
+                        <div class="follow_wrapper d-flex align-items-center justify-content-around">
+                            <div class="follower d-flex align-items-center justify-content-between">
+                                <div class="icon">
+                                    <i class="flaticon-user-profile"></i>
+                                </div>
+                                <div class="amount">
+                                    <a href="#">2,239</a>
+                                    <p>FOLLOWERS</p>
+                                </div>
+                            </div>
+                            <div class="following d-flex align-items-center justify-content-between">
+                                <div class="icon">
+                                    <i class="flaticon-user-profile"></i>
+                                </div>
+                                <div class="amount">
+                                    <a href="">5,339</a>
+                                    <p>FOLLOWING</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="follow_btn text-center">
+                            <a href="#">FOLLOW</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-4 col-xxl-3">
+                <div class="followers_col">
+                    <div class="member_wrapper">
+                        <div class="bg_head">
+                            <img src="assets/images/followers/elena_bg.png" alt="Cover Image">
+                        </div>
+                        <div class="profile_wrapper text-center">
+                            <div class="profile_content">
+                                <a href="#" class="profile">
+                                    <!--====small profile picture start====-->
+                                    <img src="assets/images/followers/elena.png" alt="Profile Picture">
+                                    <!--====small profile picture end====-->
+                                </a>
+                                <span class="d-flex align-items-center justify-content-center">18</span>
+                            </div>
+                            <h5 class="text-center">
+                                <a href="player-profile.html">ELLENA CANNON</a>
+                            </h5>
+                        </div>
+                        <div class="follow_wrapper d-flex align-items-center justify-content-around">
+                            <div class="follower d-flex align-items-center justify-content-between">
+                                <div class="icon">
+                                    <i class="flaticon-user-profile"></i>
+                                </div>
+                                <div class="amount">
+                                    <a href="#">2,239</a>
+                                    <p>FOLLOWERS</p>
+                                </div>
+                            </div>
+                            <div class="following d-flex align-items-center justify-content-between">
+                                <div class="icon">
+                                    <i class="flaticon-user-profile"></i>
+                                </div>
+                                <div class="amount">
+                                    <a href="">5,339</a>
+                                    <p>FOLLOWING</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="follow_btn text-center">
+                            <a href="#">FOLLOW</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row followers_two_row">
+            <div class="col-sm-6 col-md-6 col-lg-4 col-xxl-3">
+                <div class="followers_col">
+                    <div class="member_wrapper">
+                        <div class="bg_head">
+                            <img src="assets/images/followers/gina_bg.png" alt="Cover Image">
+                        </div>
+                        <div class="profile_wrapper text-center">
+                            <div class="profile_content">
+                                <a href="#" class="profile">
+                                    <!--====small profile picture start====-->
+                                    <img src="assets/images/followers/gina.png" alt="Profile Picture">
+                                    <!--====small profile picture end====-->
+                                </a>
+                                <span class="d-flex align-items-center justify-content-center">18</span>
+                            </div>
+                            <h5 class="text-center">
+                                <a href="player-profile.html">GINA FLORES</a>
+                            </h5>
+                        </div>
+                        <div class="follow_wrapper d-flex align-items-center justify-content-around">
+                            <div class="follower d-flex align-items-center justify-content-between">
+                                <div class="icon">
+                                    <i class="flaticon-user-profile"></i>
+                                </div>
+                                <div class="amount">
+                                    <a href="#">2,239</a>
+                                    <p>FOLLOWERS</p>
+                                </div>
+                            </div>
+                            <div class="following d-flex align-items-center justify-content-between">
+                                <div class="icon">
+                                    <i class="flaticon-user-profile"></i>
+                                </div>
+                                <div class="amount">
+                                    <a href="">5,339</a>
+                                    <p>FOLLOWING</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="follow_btn text-center">
+                            <a href="#">FOLLOW</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-4 col-xxl-3">
+                <div class="followers_col">
+                    <div class="member_wrapper">
+                        <div class="bg_head">
+                            <img src="assets/images/followers/abel_bg.png" alt="Cover Image">
+                        </div>
+                        <div class="profile_wrapper text-center">
+                            <div class="profile_content">
+                                <a href="#" class="profile">
+                                    <!--====small profile picture start====-->
+                                    <img src="assets/images/followers/abel.png" alt="Profile Picture">
+                                    <!--====small profile picture end====-->
+                                </a>
+                                <span class="d-flex align-items-center justify-content-center">18</span>
+                            </div>
+                            <h5 class="text-center">
+                                <a href="player-profile.html">ABEL WARREN</a>
+                            </h5>
+                        </div>
+                        <div class="follow_wrapper d-flex align-items-center justify-content-around">
+                            <div class="follower d-flex align-items-center justify-content-between">
+                                <div class="icon">
+                                    <i class="flaticon-user-profile"></i>
+                                </div>
+                                <div class="amount">
+                                    <a href="#">2,239</a>
+                                    <p>FOLLOWERS</p>
+                                </div>
+                            </div>
+                            <div class="following d-flex align-items-center justify-content-between">
+                                <div class="icon">
+                                    <i class="flaticon-user-profile"></i>
+                                </div>
+                                <div class="amount">
+                                    <a href="">5,339</a>
+                                    <p>FOLLOWING</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="follow_btn text-center">
+                            <a href="#">FOLLOW</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-4 col-xxl-3">
+                <div class="followers_col">
+                    <div class="member_wrapper">
+                        <div class="bg_head">
+                            <img src="assets/images/followers/ollie_bg.png" alt="Cover Image">
+                        </div>
+                        <div class="profile_wrapper text-center">
+                            <div class="profile_content">
+                                <a href="#" class="profile">
+                                    <!--====small profile picture start====-->
+                                    <img src="assets/images/followers/ollie.png" alt="Profile Picture">
+                                    <!--====small profile picture end====-->
+                                </a>
+                                <span class="d-flex align-items-center justify-content-center">18</span>
+                            </div>
+                            <h5 class="text-center">
+                                <a href="player-profile.html">OLLIE FLOYD</a>
+                            </h5>
+                        </div>
+                        <div class="follow_wrapper d-flex align-items-center justify-content-around">
+                            <div class="follower d-flex align-items-center justify-content-between">
+                                <div class="icon">
+                                    <i class="flaticon-user-profile"></i>
+                                </div>
+                                <div class="amount">
+                                    <a href="#">2,239</a>
+                                    <p>FOLLOWERS</p>
+                                </div>
+                            </div>
+                            <div class="following d-flex align-items-center justify-content-between">
+                                <div class="icon">
+                                    <i class="flaticon-user-profile"></i>
+                                </div>
+                                <div class="amount">
+                                    <a href="">5,339</a>
+                                    <p>FOLLOWING</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="follow_btn text-center">
+                            <a href="#">FOLLOW</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-4 col-xxl-3">
+                <div class="followers_col">
+                    <div class="member_wrapper">
+                        <div class="bg_head">
+                            <img src="assets/images/followers/noel_bg.png" alt="Cover Image">
+                        </div>
+                        <div class="profile_wrapper text-center">
+                            <div class="profile_content">
+                                <a href="#" class="profile">
+                                    <!--====small profile picture start====-->
+                                    <img src="assets/images/followers/noel.png" alt="Profile Picture">
+                                    <!--====small profile picture end====-->
+                                </a>
+                                <span class="d-flex align-items-center justify-content-center">18</span>
+                            </div>
+                            <h5 class="text-center">
+                                <a href="player-profile.html">NOEL THOMAS</a>
+                            </h5>
+                        </div>
+                        <div class="follow_wrapper d-flex align-items-center justify-content-around">
+                            <div class="follower d-flex align-items-center justify-content-between">
+                                <div class="icon">
+                                    <i class="flaticon-user-profile"></i>
+                                </div>
+                                <div class="amount">
+                                    <a href="#">2,239</a>
+                                    <p>FOLLOWERS</p>
+                                </div>
+                            </div>
+                            <div class="following d-flex align-items-center justify-content-between">
+                                <div class="icon">
+                                    <i class="flaticon-user-profile"></i>
+                                </div>
+                                <div class="amount">
+                                    <a href="">5,339</a>
+                                    <p>FOLLOWING</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="follow_btn text-center">
+                            <a href="#">FOLLOW</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="show_wrapper text-center">
+            <a href="#">View More</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block inner_right %}
+<div class="view_wrapper d-flex align-items-center justify-content-between">
+    <div class="text">
+        <h5>Top Investors</h5>
+    </div>
+    <div class="link">
+        <a href="league.html">VIEW ALL</a>
+    </div>
+</div>
+<div class="row member_row">
+    <div class="member_col col-sm-6 col-md-6 col-lg-4 col-xl-12">
+        {% for investor in top_investors %}
+            <div class="member_wrapper">
+                <div class="profile_wrapper text-center">
+                    <div class="profile_content">
+                        <a href="player-profile.html" class="profile">
+                        </a>
+                        <span class="d-flex align-items-center justify-content-center">18</span>
+                    </div>
+                    <h5 class="text-center">
+                        <a href="player-profile.html">{{investor.name}}</a>
+                    </h5>
+                </div>
+                <div class="follow_wrapper d-flex align-items-center justify-content-around">
+                    <div class="follower d-flex align-items-center justify-content-between">
+                        <div class="icon">
+                            <i class="flaticon-user-profile"></i>
+                        </div>
+                        <div class="amount">
+                            <a href="user-about.html#followers">2,239</a>
+                            <p>FOLLOWERS</p>
+                        </div>
+                    </div>
+                    <div class="following d-flex align-items-center justify-content-between">
+                        <div class="icon">
+                            <i class="flaticon-user-profile"></i>
+                        </div>
+                        <div class="amount">
+                            <a href="user-about.html">5,339</a>
+                            <p>FOLLOWING</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="income_wrapper d-flex align-items-center justify-content-around">
+                    <div class="income">
+                        <p class="income_amount"><i class="fas fa-dollar-sign"></i>1259</p>
+                        <span>Income</span>
+                    </div>
+                    <div class="percentage">
+                        <p class="income_percent">40%</p>
+                        <span>ROI</span>
+                    </div>
+                </div>
+                <div class="follow_btn text-center">
+                    <a href="#">FOLLOW</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+
+{% block javascript %}
+	<script type="text/javascript">
+		var latestCmp = "{{latest_cmp}}";
+		var company_id = "{{company.id}}";
+		var userID = "{{ request.user.id }}";
+	</script>
+	<script src="{% static 'js/player_details.js' %}"></script>
+	<script src="{% static 'js/cmp_socket.js' %}"></script>
+{% endblock%}
+
+{% block css_files %}
+	<link href="{% static 'css/utility.css' %}" type="text/css" rel="stylesheet">
+{% endblock %}

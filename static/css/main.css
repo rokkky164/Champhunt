@@ -1,0 +1,184 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,700');
+
+html, body {
+	height: 100%;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+}
+
+#wrap {
+	min-height: 75%;
+}
+
+#main {
+	overflow:auto;
+	padding-bottom:80px; /* this needs to be bigger than footer height*/
+}
+
+.footer {
+	position: relative;
+	margin-top: -80px; /* negative value of footer height */
+	height: 80px;
+	clear:both;
+	padding-top:20px;
+}
+
+
+.dropdown .dropdown-menu a:hover {
+	background-color: #dcdce1;
+	color: #000;
+}
+
+.footer-custom {
+	background-color: #dcdce1;
+	padding: 60px 40px;
+	width: 100vw !important;
+	margin-left: calc(-50vw + 50%);
+	color: #000;
+}
+
+a.dropdown-item.active {
+	background-color:#D9CDCA;
+color: #000;
+}
+
+.anchor-black {
+	text-decoration: none;
+	color: black;
+}
+
+.heading {
+	text-align: center;
+	margin-top: 1.5rem;
+}
+
+.btn-hover {
+	background-color: #dcdce1;
+	color: #000;
+}
+
+.news-badge {
+	font-size: medium;
+}
+
+.side-navbar-left {
+
+	position: absolute;
+	left: 0px;
+	width: 300px;
+	height: 60%;
+	background-color:#F0FFFF;
+	text-align: center;
+	transition: 0.800s ease;
+	border-width: 15px;
+}
+
+.side-navbar {
+
+	position: absolute;
+	right: 0px;
+	width: 300px;
+	height: 60%;
+	background-color: #F0FFFF;
+	text-align: center;
+	transition: 0.800s ease;
+	border-width: 15px;
+}
+
+.side-navbar  > side-nav {
+
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+
+}
+
+
+.btn-grn {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 13px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.btn-red {
+  background-color: #ff0000; /* Red */
+  border: none;
+  color: white;
+  padding: 7px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.stock-graph {
+	height: 60%;
+  width: 100%;
+ }
+
+.csm-btn, .csm-btn:hover {
+	background-color: #000000;
+}
+
+
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #000000;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+  background-color: #191970;
+	color: grey;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 10px 12px;
+  font-size: 17px;
+  width: 25%;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: yellow;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  font-weight: bold;
+}
+
+.watchlist-tab {
+	padding: 3px;
+
+}
+
+.watchlist-tab:hover { 
+   background: lightseagreen; 
+}
+
+.no-margin {
+  margin: 0px !important;
+}
+
+.bring-center {
+		display:flex;
+    justify-content: center;
+}
+
+.bold-text {
+	font-weight: bold;
+}

@@ -1,0 +1,43 @@
+<center>
+    <!-- <div class="row"> -->
+        <div class="col-8">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th colspan = "2" class="text-left">{{ teamname }}</th>
+                    </tr>
+                    <tr>
+                        <th class="text-center">S.no</th>
+                        <th class="text-center">Stock</th>
+                        <!-- <th class="text-center">Stocks Available</th> -->
+                        <th class="text-center">CMP</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for object in players %}
+                            <tr>
+                                <td class="text-center">{{ forloop.counter }}</td>
+                                <td class="text-center">
+                                    <a href="{% url 'market:transaction' object.company.code %}">
+                                        {{ object.name }}
+                                    </a>
+                                </td>
+                                <td class="text-center">
+                                    &#8377;{{ object.company.cmp }}
+                                    {% if object.current_form >= 0 %}
+                                        <small style="color: green">
+                                            ({{ object.company.cfcmp }}) <i class="fa fa-arrow-up"></i>
+                                        </small><br>
+                                    {% elif object.current_form < 0 %}
+                                        <small style="color: red">
+                                            ({{ object.company.cfcmp }}) <i class="fa fa-arrow-down"></i>
+                                        </small><br>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    <!-- </div> -->
+</center>

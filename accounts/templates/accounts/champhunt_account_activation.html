@@ -1,0 +1,13 @@
+{% autoescape off %}
+
+Hello {{user.email}},
+	Thanks for signing up.
+	Please click on the link below to activate your account
+
+	<a href="{{activation_url}}">accept/decline</a> 
+
+<b>Thanks and Regards</b>
+
+<b>Team Champhunt</b>
+
+{% endautoescape %}

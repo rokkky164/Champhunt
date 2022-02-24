@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block base_head %}
+<title>Scoring Dashboard</title>
+{% endblock %}
+
+
+{% block content %}
+<p>
+    <h5>Match no.: {{ match_id }} - {{ home_team }} vs {{ away_team }} </h5>
+</p>
+<p>
+<form action="" method='POST'>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="Submit" name="submit" value="Submit"/>
+</form>
+</p>
+
+<!--This is just to test the code push on git-->
+{% endblock %}
